@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -82,7 +81,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.delete(user);
                 transaction.commit();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -97,7 +96,7 @@ public class UserDaoHibernateImpl implements UserDao {
             Query<User> query = session.createQuery("FROM User", User.class);
             return query.getResultList();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return List.of();
         }
@@ -108,9 +107,9 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.createNativeQuery("TRUNCATE TABLE User").executeUpdate();
+            session.createQuery("DELETE FROM User").executeUpdate();
             transaction.commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }

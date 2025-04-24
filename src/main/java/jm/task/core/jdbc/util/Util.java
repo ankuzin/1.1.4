@@ -16,13 +16,14 @@ public class Util {
 
     private static SessionFactory sessionFactory;
 
-    public static Connection getConnection()  {
+    public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
@@ -42,7 +43,7 @@ public class Util {
 
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException(e);
 
@@ -51,7 +52,6 @@ public class Util {
         }
         return sessionFactory;
     }
-
 
 
 }
